@@ -77,20 +77,28 @@ public class View {
 		scan.nextLine(); //buffer tava errado
 	}
 	
-	// resolver isso aqui depois, pois não tá encontrando os valores corretos
+	// resolvido, era o buffer
 	public void listarPorNome(List<Suplementos> meusSuplementos) {
-		System.out.println("\nDigite o nome do suplemento: ");
-		String nomeSuplemento = scan.nextLine();
 		scan.nextLine();
 		
+		boolean encontrado = false;
+		
+		System.out.println("\nDigite o nome do suplemento: ");
+		String nomeSuplemento = scan.nextLine();
+		
 		for(Suplementos i : meusSuplementos) {
-			
-			if(i.getNome().equals(nomeSuplemento)) {
-				System.out.println(i.getNome() + "\t|\t" + i.getPreco() + "\t|\t" + i.getQuantidade() + "\t\t|\t" + i.getMarca());
 				
-			}else {
-				System.err.println("\nSuplemento não encontrado.");
+			if(i.getNome().equalsIgnoreCase(nomeSuplemento)) {
+				encontrado = true;
+				System.out.println("Nome\t|\tPreço\t|\tQuantidade\t|\tMarca");
+				System.out.println(i.getNome() + "\t|\t" + i.getPreco() + "\t|\t" + i.getQuantidade() + "\t\t|\t" + i.getMarca());
+				break;
+					
 			}
+		}
+		
+		if(!encontrado) {
+			System.err.println("\nSuplemento não encontrado.");
 		}
 	}
 	
@@ -111,23 +119,27 @@ public class View {
 		
 	}
 	
-	// resolver isso também, por algum motivo do além, isso aqui só aceita int ',:/
+	// TODO: resolver isso também, por algum motivo do além, isso aqui só aceita int ',:/
 	public String removerSuplemento(List<Suplementos> meusSuplementos) {
+		System.out.println();
 		for(Suplementos i : meusSuplementos) {
-			for(int cont = 1; cont < meusSuplementos.size(); cont++) {
-				System.out.println(cont + "- " + i.getNome());
-			}
+			System.out.println("> " + i.getNome());
 		}
 		
 		System.out.println("\nDigite o nome do suplemento que você quer remover: ");
-		String nomeRemover = scan.next();
+		String nomeRemover = scan.nextLine();
 		
 		return nomeRemover;
 	}
+	// tá tudo funcionando certinho, mas isso aqui... EU NÃO SEI POR QUE ISSO NÃO FUNCIONA Dx
 	
 	public void qtdCadastros(int cont) {
 		System.out.println("\nA quantidade atual de cadastros é de: " + cont);
 		
+	}
+	
+	public void fecharScanner() {
+		scan.close();
 	}
 	
 }

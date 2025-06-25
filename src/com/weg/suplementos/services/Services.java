@@ -50,6 +50,7 @@ public class Services {
 			}
 		
 		case 0 -> {
+				view.fecharScanner();
 				System.exit(0);
 					
 			}
@@ -75,17 +76,13 @@ public class Services {
 	public void deletarSuplemento(String nomeSuplemento) {
 		int cont = 0;
 		
-		do {
-			for(Suplementos i : meusSuplementos) {
-				String nomeSelecionado = i.getNome();
-				
-				if(nomeSelecionado.equalsIgnoreCase(nomeSuplemento)) {
-					meusSuplementos.remove(cont);
-				}
+		for(Suplementos i : meusSuplementos) {
+			if(i.getNome().equalsIgnoreCase(nomeSuplemento)) {
+				meusSuplementos.remove(cont);
+			}else {
+				cont++;
 			}
-			cont++;
-			
-		}while(cont < meusSuplementos.size());
+		}
 	}
 	
 	public int contarCadastros() {
